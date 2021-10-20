@@ -35,34 +35,6 @@ async def site (message: types.Message):
 async def support (message: types.Message):
     await message.answer('Якщо у вас виникли проблеми, повідомте про помилки нам на пошту citiesgame@citiesgame.tk')
 
-@dp.message_handler(commands=['help'])
-async def help_user(message: types.Message):
-    userc.execute(f'''SELECT * FROM users WHERE user_id="{message.from_user.id}"''')
-    try:
-        if message.from_user.id == userc.fetchall()[0][0]:
-            userc.execute(f'''SELECT activity FROM users WHERE user_id="{message.from_user.id}"''')
-            if userc.fetchall()[0][0] == 'FALSE':
-                await message.answer('Розпочніть гру щоб використовувати цю команду')
-            else:
-                if user.execute(f'''SELECT last FROM last_letter WHERE user_id="{message.from_user.id}"''') == "":
-                    userc.execute(f'''SELECT name FROM user_base_{message.from_user.id}"''')
-                    long_base_name=len(userc.fetchall())
-                    userc.execute(f'''SELECT name FROM user_base_{message.from_user.id}"''')
-                    await message.answer(f'Підказка "{userc.fetchall()[random.randint(0,long_base_name)][0]}"')
-                else:
-                    userc.execute(f'''SELECT help FROM help WHERE user_id="{message.from_user.id}"''')
-                    if int(userc.fetchall()[0][0]) < 3:
-                        user.execute(f'''SELECT last FROM last_letter WHERE user_id="{message.from_user.id}"''')
-                        userc.execute(f'''SELECT name FROM user_base_{message.from_user.id} WHERE name LIKE "{userc.fetchall()[0][0]}%"''')
-                        long_base_name=len(userc.fetchall())
-                        userc.execute(f'''SELECT name FROM user_base_{message.from_user.id} WHERE name LIKE "{userc.fetchall()[0][0]}%"''')
-                        await message.answer(f'Підказка "{userc.fetchall()[random.randint(0,long_base_name)][0]}"')
-                        userc.execute(f'''SELECT help FROM help WHERE user_id="{message.from_user.id}"''')
-                        await message.answer(F'У вас залишилось {3-int(userc.fetchall()[0][0])} підказки')
-                    else:
-                        await message.answer('Ви використали всі підказки')
-    except:
-        await message.answer('Розпочніть гру щоб використовувати цю команду')
 
 @dp.message_handler(commands=['start_game'])
 async def starting(message: types.Message):
