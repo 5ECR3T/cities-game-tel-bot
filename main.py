@@ -3,8 +3,6 @@ import logging
 import random
 import sqlite3
 
-admin=['NULL']
-
 logging.basicConfig(level=logging.INFO)
 bot=Bot(token="BOT_TOKEN")
 dp=Dispatcher(bot)
